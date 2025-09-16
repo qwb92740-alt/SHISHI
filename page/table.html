@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单管理 - 旅游管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        /* 订单状态标签样式 */
+        .order-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .status-pending {
+            background-color: #faad14;
+            color: white;
+        }
+        .status-paid {
+            background-color: #52c41a;
+            color: white;
+        }
+        .status-finished {
+            background-color: #1890ff;
+            color: white;
+        }
+        .status-canceled {
+            background-color: #f5222d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索订单</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">订单号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="orderNo" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">线路名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="routeName" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">订单状态</label>
+                            <div class="layui-input-inline">
+                                <select name="status">
+                                    <option value="">全部状态</option>
+                                    <option value="pending">待支付</option>
+                                    <option value="paid">已支付</option>
+                                    <option value="finished">已完成</option>
+                                    <option value="canceled">已取消</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加订单 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除 </button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
+        </script>
+
+        <!-- 编辑订单的弹窗表单 -->
+        <div id="editOrderForm" style="display: none; padding: 20px;">
+            <form class="layui-form" lay-filter="editOrderFilter">
+                <input type="hidden" name="id">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">订单号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="orderNo" class="layui-input" readonly>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">线路名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="routeName" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">人数</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="peopleCount" class="layui-input" min="1">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">订单金额</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="totalPrice" class="layui-input" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">订单状态</label>
+                    <div class="layui-input-block">
+                        <select name="status">
+                            <option value="pending">待支付</option>
+                            <option value="paid">已支付</option>
+                            <option value="finished">已完成</option>
+                            <option value="canceled">已取消</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="editOrderSubmit">确认修改</button>
+                        <button type="button" class="layui-btn layui-btn-primary" id="cancelEdit">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            layer = layui.layer;
+
+        // 模拟订单数据（实际开发中替换为接口请求）
+        var mockOrderData = [];
+        for (var i = 0; i < 100; i++) {
+            mockOrderData.push({
+                id: 10000 + i,
+                orderNo: 'ORD' + (10000 + i),
+                routeName: '云南昆明大理丽江' + i + '日游',
+                username: 'user' + i,
+                peopleCount: Math.floor(Math.random() * 10) + 1,
+                totalPrice: (Math.random() * 5000 + 1000).toFixed(2),
+                orderTime: '2025-09-' + (10 + i % 20) + ' ' + (8 + i % 12) + ':' + (i % 60) + ':' + (i % 60),
+                status: i % 4 === 0 ? 'pending' : i % 4 === 1 ? 'paid' : i % 4 === 2 ? 'finished' : 'canceled'
+            });
+        }
+
+        // 保存原始数据的深拷贝
+        var originalOrderData = JSON.parse(JSON.stringify(mockOrderData));
+
+        // 渲染表格
+        var tableIns = table.render({
+            elem: '#currentTableId',
+            data: mockOrderData,
+            toolbar: '#toolbarDemo',
+            defaultToolbar: [],
+            cols: [[
+                {type: "checkbox", width: 50},
+                {field: 'id', width: 80, title: 'ID', sort: true},
+                {field: 'orderNo', width: 120, title: '订单号'},
+                {field: 'routeName', width: 180, title: '线路名称'},
+                {field: 'username', width: 100, title: '用户'},
+                {field: 'peopleCount', width: 80, title: '人数'},
+                {field: 'totalPrice', width: 100, title: '订单金额(元)', sort: true},
+                {field: 'orderTime', width: 160, title: '下单时间'},
+                {
+                    field: 'status', width: 100, title: '订单状态', sort: true,
+                    templet: function (d) {
+                        var statusText = '';
+                        var statusClass = '';
+                        if (d.status === 'pending') {
+                            statusText = '待支付';
+                            statusClass = 'status-pending';
+                        } else if (d.status === 'paid') {
+                            statusText = '已支付';
+                            statusClass = 'status-paid';
+                        } else if (d.status === 'finished') {
+                            statusText = '已完成';
+                            statusClass = 'status-finished';
+                        } else if (d.status === 'canceled') {
+                            statusText = '已取消';
+                            statusClass = 'status-canceled';
+                        }
+                        return '<span class="order-status ' + statusClass + '">' + statusText + '</span>';
+                    }
+                },
+                {title: '操作', minWidth: 180, toolbar: '#currentTableBar', align: "center"}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var orderNo = data.field.orderNo || '无';
+            var routeName = data.field.routeName || '无';
+            var username = data.field.username || '无';
+            var status = data.field.status || '全部状态';
+            
+            layer.msg(`搜索成功！订单号: ${orderNo}, 线路名称: ${routeName}`, {icon: 1});
+            return false;
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'add') {  // 添加订单
+                // 修改部分：点击添加订单按钮不执行任何操作，不显示任何信息
+            } else if (obj.event === 'delete') {  // 批量删除
+                var checkStatus = table.checkStatus('currentTableId')
+                    , data = checkStatus.data;
+                if (data.length === 0) {
+                    layer.msg('请选择要删除的订单', {icon: 2});
+                    return;
+                }
+                layer.confirm('确定要删除选中的 ' + data.length + ' 个订单吗？', function (index) {
+                    layer.close(index);
+                    layer.msg('已删除选中订单', {icon: 1});
+                    table.reload('currentTableId');
+                });
+            }
+        });
+
+        // 保存当前编辑的订单ID
+        var currentEditId = null;
+        
+        // 监听表格行操作
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') { // 编辑订单
+                currentEditId = data.id;
+                
+                // 填充表单数据
+                form.val('editOrderFilter', {
+                    "id": data.id,
+                    "orderNo": data.orderNo,
+                    "routeName": data.routeName,
+                    "username": data.username,
+                    "peopleCount": data.peopleCount,
+                    "totalPrice": data.totalPrice,
+                    "status": data.status
+                });
+                
+                // 打开编辑弹窗
+                layer.open({
+                    title: '编辑订单 - ' + data.orderNo,
+                    type: 1,
+                    content: $('#editOrderForm'),
+                    area: ['600px', '450px'],
+                    success: function(layero, index) {
+                        // 重新渲染表单
+                        form.render();
+                    }
+                });
+            } else if (obj.event === 'delete') { // 删除订单
+                layer.confirm('确定要删除订单 ' + data.orderNo + ' 吗？', function (index) {
+                    obj.del();
+                    layer.close(index);
+                    layer.msg('订单已删除', {icon: 1});
+                });
+            } else if (obj.event === 'detail') { // 查看详情
+                layer.open({
+                    title: '订单详情 - ' + data.orderNo,
+                    type: 1,
+                    content: '<div style="padding: 20px;">' +
+                        '<p>订单号：' + data.orderNo + '</p>' +
+                        '<p>线路名称：' + data.routeName + '</p>' +
+                        '<p>用户：' + data.username + '</p>' +
+                        '<p>人数：' + data.peopleCount + '人</p>' +
+                        '<p>金额：¥' + data.totalPrice + '</p>' +
+                        '<p>下单时间：' + data.orderTime + '</p>' +
+                        '<p>状态：' + (data.status === 'pending' ? '待支付' : data.status === 'paid' ? '已支付' : data.status === 'finished' ? '已完成' : '已取消') + '</p>' +
+                        '</div>',
+                    area: ['500px', '400px']
+                });
+            }
+        });
+
+        // 监听编辑表单提交
+        form.on('submit(editOrderSubmit)', function(data) {
+            // 关闭弹窗
+            layer.closeAll('page');
+            
+            // 显示成功提示，但不实际修改数据
+            layer.msg('订单修改成功！', {icon: 1});
+            
+            // 重新加载表格数据（使用原始数据，保持不变）
+            mockOrderData = JSON.parse(JSON.stringify(originalOrderData));
+            table.reload('currentTableId', {
+                data: mockOrderData
+            });
+            
+            return false;
+        });
+
+        // 取消编辑
+        $('#cancelEdit').on('click', function() {
+            layer.closeAll('page');
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页二</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
+        .icon {margin-right:10px;color:#1aa094;}
+        .icon-cray {color:#ffb800!important;}
+        .icon-blue {color:#1e9fff!important;}
+        .icon-tip {color:#ff5722!important;}
+        .layuimini-qiuck-module {text-align:center;margin-top: 10px}
+        .layuimini-qiuck-module a i {display:inline-block;width:100%;height:60px;line-height:60px;text-align:center;border-radius:2px;font-size:30px;background-color:#F8F8F8;color:#333;transition:all .3s;-webkit-transition:all .3s;}
+        .layuimini-qiuck-module a cite {position:relative;top:2px;display:block;color:#666;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
+        .welcome-module {width:100%;height:210px;}
+        .panel {background-color:#fff;border:1px solid transparent;border-radius:3px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+        .panel-body {padding:10px}
+        .panel-title {margin-top:0;margin-bottom:0;font-size:12px;color:inherit}
+        .label {display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em;margin-top: .3em;}
+        .layui-red {color:red}
+        .main_btn > p {height:40px;}
+        .layui-bg-number {background-color:#F8F8F8;}
+        .layuimini-notice:hover {background:#f6f6f6;}
+        .layuimini-notice {padding:7px 16px;clear:both;font-size:12px !important;cursor:pointer;position:relative;transition:background 0.2s ease-in-out;}
+        .layuimini-notice-title,.layuimini-notice-label {
+            padding-right: 70px !important;text-overflow:ellipsis!important;overflow:hidden!important;white-space:nowrap!important;}
+        .layuimini-notice-title {line-height:28px;font-size:14px;}
+        .layuimini-notice-extra {position:absolute;top:50%;margin-top:-8px;right:16px;display:inline-block;height:16px;color:#999;}
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md8">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-warning icon"></i>基础数据</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-blue">实时</span>
+                                                        <h5>用户数目</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">2778</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-cyan">实时</span>
+                                                        <h5>旅游线路数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">191</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-orange">实时</span>
+                                                        <h5>今日营收</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">32244</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-green">实时</span>
+                                                        <h5>未完成订单总数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">1391</h1>
+                                                        <small>当前分类总记录数</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>快捷入口</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10 layuimini-qiuck">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/menu.html" data-title="菜单管理" data-icon="fa fa-window-maximize">
+                                                <i class="fa fa-window-maximize"></i>
+                                                <cite>菜单管理</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/setting.html" data-title="系统设置" data-icon="fa fa-gears">
+                                                <i class="fa fa-gears"></i>
+                                                <cite>系统设置</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/table.html" data-title="表格示例" data-icon="fa fa-file-text">
+                                                <i class="fa fa-file-text"></i>
+                                                <cite>表格示例</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/icon.html" data-title="图标列表" data-icon="fa fa-dot-circle-o">
+                                                <i class="fa fa-dot-circle-o"></i>
+                                                <cite>图标列表</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/form.html" data-title="表单示例" data-icon="fa fa-calendar">
+                                                <i class="fa fa-calendar"></i>
+                                                <cite>表单示例</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/404.html" data-title="404页面" data-icon="fa fa-hourglass-end">
+                                                <i class="fa fa-hourglass-end"></i>
+                                                <cite>404页面</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="page/button.html" data-title="按钮示例" data-icon="fa fa-snowflake-o">
+                                                <i class="fa fa-snowflake-o"></i>
+                                                <cite>按钮示例</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="https://www.baidu.com" data-title="百度搜索" data-icon="fa fa-search">
+                                                <i class="fa fa-search"></i>
+                                                <cite>百度搜索</cite>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
+                            <div class="layui-card-body">
+                                <div id="echarts-records" style="width: 100%;min-height:500px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md4">
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>公告</div>
+                    <div class="layui-card-body layui-text">
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">关于近期黄山等风景区暂时关闭...</div>
+                            <div class="layuimini-notice-extra">2025-09-01 23:06</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                关于黄山风景区临时闭园的公告
+                                尊敬的游客：
+                                受台风 “海燕” 影响，为保障游客人身安全，景区决定于 9 月 15 日 0 时至 9 月 17 日 24 时临时闭园，暂停接待游客。
+                                已购票游客可通过原购票渠道申请全额退款，由此带来的不便，敬请谅解。具体开园时间将根据天气情况另行通知，敬请关注景区官方公众号。<br>
+                               关于九寨沟景区部分区域关闭的公告,因近期持续降雨导致九寨沟景区内 “火花海” 至 “诺日朗瀑布” 段步行栈道出现轻微损坏，该区域将于 10 月 1 日至 10 月 10 日临时关闭。
+                               景区其他区域（如五花海、长海等）正常开放，已预订相关区域深度游的游客，可联系客服更换路线或办理退款。感谢您的理解与配合。
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">秋季热门景点推荐</div>
+                            <div class="layuimini-notice-extra">2025-09-01 12:57</div>
+                            <div class="layuimini-notice-content layui-hide">
+                               新疆喀纳斯：9 月的喀纳斯，就像被上帝打翻了调色盘。金黄、殷红、墨绿的树林层林尽染，奶蓝色的湖泊光彩照人，
+							   还有月亮湾、卧龙湾等美景，满足你对秋天的所有幻想。地点在新疆阿勒泰地区布尔津县境内北部，最佳观赏时间是 9 月中旬至 10 月上旬 。<br>
+                               内蒙古额济纳旗：这里有 38 万亩胡杨林，张艺谋的《英雄》曾在此取景。
+							   每年 9 月中旬至 10 月上旬，胡杨林呈现出一片金黄，漫步其中，仿佛走进至纯至美的世界 。<br>
+                               辽宁本溪：作为 “中国枫叶之都”，9 月下旬至 10 月中旬
+							   ，本溪的枫叶率先变红。洋湖沟、老边沟、关门山等地枫叶绚烂，还有中华最美枫叶大道 —— 本桓公路，一路美景不断 。
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">9月份旅游线路上新</div>
+                            <div class="layuimini-notice-extra">2025-09-01 14:28</div>
+                            <div class="layuimini-notice-content layui-hide">
+                               尊敬的游客：
+                               为满足大家秋季探秘川西秘境的需求，系统新增 “川西稻城亚丁 5 日深度游” 线路，9月3日起正式上线接受预订！
+							   全程沿 G318 川藏南线前行，打卡新都桥 “光与影的世界”、理塘 “世界高城”，深入稻城亚丁核心景区，徒步牛奶海、五色海，近距离观赏仙乃日雪山秋景；
+							   全程含 4 晚精品住宿（含 1 晚亚丁景区周边供氧酒店），配备专业领队讲解川西人文与自然知识，还赠送高原旅游意外险。<br>
+							   亲爱的游客朋友们：
+							   针对家庭亲子出游需求，系统新增 “青岛 + 威海 + 烟台 4 日亲子游” 线路，10 月 1 日起开启预订，国庆假期可优先锁定名额！
+							   线路亮点：打卡青岛八大关 “万国建筑博览群”、五四广场灯光秀，带孩子走进威海刘公岛甲午战争博物馆学历史，在烟台金沙滩浴场体验赶海拾贝、沙滩游戏；
+							   全程含 3 晚亲子主题酒店（含双早），特别安排 “小小航海家” 体验活动（学习航海知识、制作船模），亲子家庭专属导游全程服务，行程节奏轻松适配儿童体力。
+							   赶快前往预约吧！！！
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">关于9月份停机更新通知</div>
+                            <div class="layuimini-notice-extra">2025-09-02 11:02</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                尊敬的用户：
+                                为优化系统体验，提升服务稳定性，旅游管理系统将于2024年9月5日 00:00-04:00进行功能维护升级。
+								维护期间，系统内 “线路预订”“订单修改”“美食 / 景点信息提交” 功能将临时暂停使用，“信息查询”“历史订单查看” 等基础功能可正常访问。
+                                此次维护主要优化内容包括：①修复线路筛选页面加载延迟问题；②新增订单进度实时查询功能；
+								③优化图片上传压缩效率，减少加载耗时。维护完成后，系统将以更流畅的体验服务大家。
+                                给您带来的不便，我们深表歉意！建议您提前规划操作时间，如需紧急协助，可拨打 24 小时客服热线：400-XXX-XXXX。
+								维护进度及恢复通知，将实时通过系统弹窗及官方公众号同步，敬请关注。
+                                923旅游管理系统运营团队
+                                2024 年 9月 2日
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">旅游管理系统使用指南</div>
+                            <div class="layuimini-notice-extra">2020-06-17 11:55</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                登录 / 注册：打开系统，输入账号密码登录；新用户点 “注册”，填账号、密码即可。忘记密码联系管理员重置。
+                                查信息：进景点 / 线路 / 美食查询页，可搜关键词（如 “北京”）或选分类筛选，点卡片看详情。
+                                加信息：进添加页，填标 “*” 的必填项，传图可预览，点 “提交” 就完成。
+                                管订单：“我的订单” 里看所有订单，点订单查详情，出行前能点 “取消预订”。
+                                留反馈：选留言类型，填标题和内容，点 “提交”，下方能看历史留言。
+                            </div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">关于使用旅游管理系统注意事项</div>
+                            <div class="layuimini-notice-extra">2020-06-17 14:53</div>
+                            <div class="layuimini-notice-content layui-hide">
+                                账号安全：密码别泄露，定期改（含字母 + 数字），公共设备用后退出登录。
+                                操作安全：填信息别造假、别违规，传图只选 jpg/png 格式，不含隐私。
+                                出行安全：订线路先看详情，取消订单要趁早，出行前查系统最新通知。
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-fire icon"></i>网站信息</div>
+                    <div class="layui-card-body layui-text">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="100">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>系统名称</td>
+                                <td>
+                                    智慧旅游管理系统
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>当前版本</td>
+                                <td>v2.0.0</td>
+                            </tr>
+                            <tr>
+                                <td>特色功能</td>
+                                <td>景区智能管理、线路智能规划、订单全流程管控、数据多维度分析</td>
+                            </tr>
+                            <tr>
+                                
+                            </tr>
+                            <tr>
+                                <td>适配场景</td>
+                                
+								<td>
+								   景区运营管理、旅行社业务统筹、游客行程服务
+								                                </td>
+                            </tr>
+                            <tr>
+                                <td>技术支持</td>
+                                <td >
+                                    采用微前端架构，支持多模块独立迭代；结合地理信息系统（GIS），实现景区点位精准管理
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-paper-plane-o icon"></i>旅游业务专属能力</div>
+                    <div class="layui-card-body layui-text layadmin-text">
+                        <p>景区数字化管理：支持景区实时客流监测、景点设备智能预警（如缆车运行状态、观景台承载量），通过系统可一键发布景区临时闭园、景点维护等通知，高效联动游客服务与运营管理。</p>
+                        <p>线路智能规划：内置智能算法，可根据季节、游客偏好（如亲子、徒步）、交通状况等，自动生成个性化旅游线路，并能实时调整受天气、道路施工影响的线路方案，保障行程顺畅。</p>
+                        <p>订单全链路服务：从游客下单、行程确认、服务跟进到售后反馈，全流程线上化管理；支持多渠道订单聚合（官网、第三方平台），自动同步票务、住宿、餐饮等关联资源状态，提升游客体验与企业运营效率。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+    layui.use(['layer', 'miniTab','echarts'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            miniTab = layui.miniTab,
+            echarts = layui.echarts;
+
+        miniTab.listen();
+
+        /**
+         * 查看公告信息
+         **/
+        $('body').on('click', '.layuimini-notice', function () {
+            var title = $(this).children('.layuimini-notice-title').text(),
+                noticeTime = $(this).children('.layuimini-notice-extra').text(),
+                content = $(this).children('.layuimini-notice-content').html();
+            var html = '<div style="padding:15px 20px; text-align:justify; line-height: 22px;border-bottom:1px solid #e2e2e2;background-color: #2f4056;color: #ffffff">\n' +
+                '<div style="text-align: center;margin-bottom: 20px;font-weight: bold;border-bottom:1px solid #718fb5;padding-bottom: 5px"><h4 class="text-danger">' + title + '</h4></div>\n' +
+                '<div style="font-size: 12px">' + content + '</div>\n' +
+                '</div>\n';
+            parent.layer.open({
+                type: 1,
+                title: '系统公告'+'<span style="float: right;right: 1px;font-size: 12px;color: #b1b3b9;margin-top: 1px">'+noticeTime+'</span>',
+                area: '300px;',
+                shade: 0.8,
+                id: 'layuimini-notice',
+                btn: ['查看', '取消'],
+                btnAlign: 'c',
+                moveType: 1,
+                content:html,
+                success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').attr({
+                        href: 'https://gitee.com/zhongshaofa/layuimini',
+                        target: '_blank'
+                    });
+                }
+            });
+        });
+
+        /**
+                * 报表功能
+                */
+               var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+       
+               var optionRecords = {
+                   title: {
+                       text: '近七天Tms流量统计'
+                   },
+                   tooltip: {
+                       trigger: 'axis',
+                       axisPointer: {
+                           type: 'cross',
+                           label: {
+                               backgroundColor: '#6a7985'
+                           }
+                       }
+                   },
+                   legend: {
+                       data: ['社交媒体引流', '内容营销引流', '搜索引擎优化引流', '广告引流', '合作引流']
+                   },
+                   toolbox: {
+                       feature: {
+                           saveAsImage: {}
+                       }
+                   },
+                   grid: {
+                       left: '3%',
+                       right: '4%',
+                       bottom: '3%',
+                       containLabel: true
+                   },
+                   xAxis: [
+                       {
+                           type: 'category',
+                           boundaryGap: false,
+                           data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                       }
+                   ],
+                   yAxis: [
+                       {
+                           type: 'value'
+                       }
+                   ],
+                   series: [
+                       {
+                           name: '社交媒体引流',
+                           type: 'line',
+                           stack: '总量',
+                           areaStyle: {},
+                           data: [120, 132, 101, 134, 90, 230, 210]
+                       },
+                       {
+                           name: '内容营销引流',
+                           type: 'line',
+                           areaStyle: {},
+                           data: [220, 182, 191, 234, 290, 330, 310]
+                       },
+                       {
+                           name: '搜索引擎优化引流',
+                           type: 'line',
+                           stack: '总量',
+                           areaStyle: {},
+                           data: [150, 232, 201, 154, 190, 330, 410]
+                       },
+                       {
+                           name: '广告引流',
+                           type: 'line',
+                           stack: '总量',
+                           areaStyle: {},
+                           data: [320, 332, 301, 334, 390, 330, 320]
+                       },
+                       {
+                           name: '合作引流',
+                           type: 'line',
+                           stack: '总量',
+                           label: {
+                               normal: {
+                                   show: true,
+                                   position: 'top'
+                               }
+                           },
+                           areaStyle: {},
+                           data: [820, 932, 901, 934, 1290, 1330, 1320]
+                       }
+                   ]
+               };
+               echartsRecords.setOption(optionRecords);
+       
+
+
+    });
+</script>
+</body>
+</html>

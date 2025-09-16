@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>旅游景点展示</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+    <style>
+        .scenic-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .scenic-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .scenic-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .scenic-desc {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .scenic-tag {
+            display: inline-block;
+            background-color: #009688;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>旅游景点展示</legend>
+        </fieldset>
+
+        <div class="search-box">
+            <div class="layui-input-inline">
+                <input type="text" id="scenicSearch" placeholder="搜索景点名称" class="layui-input">
+            </div>
+            <button class="layui-btn layui-btn-normal" id="searchBtn">搜索</button>
+        </div>
+
+        <!-- 景点列表 -->
+        <div id="scenicList" class="layui-row layui-col-space15">
+            <!-- 景点卡片将通过JS动态加载 -->
+        </div>
+
+        <!-- 分页 -->
+        <div id="scenicPagination" class="layui-text-center" style="margin-top: 20px;"></div>
+    </div>
+</div>
+
+<script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'laypage'], function () {
+        var $ = layui.jquery,
+            laypage = layui.laypage;
+
+        // 模拟景点数据
+        var scenicData = [
+            {
+                id: 1,
+                name: "青岛海滩",
+                desc: "青岛海滩，蓝天碧海，沙子细腻，是度假休闲的绝佳去处，能尽情享受阳光与海浪。",
+                img: "https://img1.qunarzz.com/travel/poi/1803/53/6b3be55d6f828637.jpg_r_640x426x70_f091f544.jpg",
+                tags: ["海滨", "度假", "休闲"]
+            },
+            {
+                id: 2,
+                name: "长城",
+                desc: "长城，世界文化遗产，沿着山脊蜿蜒，宛如巨龙盘踞，承载着厚重的历史与文化底蕴。",
+                img: "https://img95.699pic.com/photo/60070/7724.jpg_wh860.jpg",
+                tags: ["历史", "文化", "雄伟"]
+            },
+            {
+                id: 3,
+                name: "泰山",
+                desc: "泰山，五岳之首，山势雄伟磅礴，登山途中可欣赏奇峰怪石，登顶能观壮丽日出。",
+                img: "https://ts1.tc.mm.bing.net/th/id/R-C.b2d5c2f32431c4c071a9b9dc15d571f9?rik=4S%2bz9B5LwH74wA&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20170915%2f353615c3aba94c83817fd3320a41b3b4.jpeg&ehk=Imldp%2fTJYkXMrd3D%2fiq5MIZo62YSbA9uDSzdmtAz9sE%3d&risl=&pid=ImgRaw&r=0",
+                tags: ["山岳", "日出", "雄伟"]
+            },
+            {
+                id: 4,
+                name: "兵马俑",
+                desc: "兵马俑，秦始皇陵的陪葬坑，数千个形态各异的陶俑，生动再现了古代军队的风貌。",
+                img: "https://ts1.tc.mm.bing.net/th/id/R-C.bda9d69b668b7f24cbc7d8609ea96a11?rik=o13IyeZO6w34NA&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50094%2f9350.jpg_wh1200.jpg&ehk=z45R7GhV0%2bjk5Cbt2zAj%2bhS7nxnNgzg9LAUg2TfJctg%3d&risl=&pid=ImgRaw&r=0",
+                tags: ["历史", "考古", "震撼"]
+            },
+            {
+                id: 5,
+                name: "西湖",
+                desc: "西湖，风景秀丽，湖光山色，周边有众多名胜古迹，如断桥、雷峰塔等，充满诗意。",
+                img: "https://ts2.tc.mm.bing.net/th/id/OIP-C.ymxme5eaVMaoXAC5w92J2gHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+                tags: ["湖泊", "诗意", "名胜"]
+            },
+            {
+                id: 6,
+                name: "张家界",
+                desc: "张家界，以奇峰异石闻名，山峰造型独特，宛如仙境，是摄影和旅游的胜地。",
+                img: "https://ts1.tc.mm.bing.net/th/id/R-C.25481fa16c413e82e9b31bfdd261be51?rik=M26zu20xIUuZNw&riu=http%3a%2f%2fimg95.699pic.com%2fphoto%2f50039%2f2566.jpg_wh860.jpg&ehk=brAi7V9x671Q905cttMy8%2fR1dByv6gyzU5qjcqB5Nyo%3d&risl=&pid=ImgRaw&r=0",
+                tags: ["山岳", "奇峰", "仙境"]
+            }
+        ];
+
+        // 渲染景点列表
+        function renderScenicList(data, page) {
+            var pageSize = 3;
+            var start = (page - 1) * pageSize;
+            var end = start + pageSize;
+            var pageData = data.slice(start, end);
+
+            var html = '';
+            pageData.forEach(function (scenic) {
+                html += '<div class="layui-col-md4">';
+                html += '<div class="scenic-card">';
+                html += '<img class="scenic-img" src="' + scenic.img + '" alt="' + scenic.name + '">';
+                html += '<div class="scenic-name">' + scenic.name + '</div>';
+                html += '<div class="scenic-desc">' + scenic.desc + '</div>';
+                html += '<div>';
+                scenic.tags.forEach(function (tag) {
+                    html += '<span class="scenic-tag">' + tag + '</span>';
+                });
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+
+            $('#scenicList').html(html);
+        }
+
+        // 渲染分页
+        function renderPagination(data) {
+            var pageSize = 3;
+            var totalPages = Math.ceil(data.length / pageSize);
+
+            laypage.render({
+                elem: 'scenicPagination',
+                count: data.length,
+                limit: pageSize,
+                curr: 1,
+                layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                jump: function (obj, first) {
+                    if (!first) {
+                        renderScenicList(data, obj.curr);
+                    }
+                }
+            });
+        }
+
+        // 搜索景点
+        $('#searchBtn').on('click', function () {
+            var keyword = $('#scenicSearch').val().trim();
+            var searchData = [];
+            if (keyword) {
+                scenicData.forEach(function (scenic) {
+                    if (scenic.name.indexOf(keyword) !== -1 || scenic.desc.indexOf(keyword) !== -1) {
+                        searchData.push(scenic);
+                    }
+                });
+            } else {
+                searchData = scenicData;
+            }
+            renderScenicList(searchData, 1);
+            renderPagination(searchData);
+        });
+
+        // 初始化
+        renderScenicList(scenicData, 1);
+        renderPagination(scenicData);
+    });
+</script>
+
+</body>
+</html>
